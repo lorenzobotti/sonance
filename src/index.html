@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="title" content="expenses calculator">
+    <meta name="description" content="simple web app to keep track of your expenses">
+    <meta name="author" content="Lorenzo Botti">
+    <meta name="theme-color" content="#0070F3"/>
+
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="new.css">
+    <link rel="manifest" href="manifest.json">
+    <title>sonance</title>
+</head>
+
+<body>
+    <header>
+        <h1>expenses calculator</h1>
+    </header>
+
+    <form id="expense-form">
+        <label for="exp-type">
+            <input type="checkbox" name="exp-type" id="exp-type" checked>
+            <span id="exp-type-out">expense</span>
+        </label>
+        <br>
+        <label for="from">
+            spender:
+            <input type="text" name="from" id="from" value="me" disabled>
+        </label>
+        <br>
+        <label for="to">
+            receiver
+            <input type="text" name="to" id="to">
+        </label>
+        <br>
+        <label for="reason">
+            reason:
+            <input type="text" name="reason" id="reason">
+        </label>
+        <br>
+        <label for="amount">
+            amount:
+            <input type="number" name="amount" id="amount" max="9999" min="0" step="0.01">
+        </label>
+        <br>
+        <button id="add">add</button>
+    </form>
+
+    <h2>transactions so far</h2>
+    <p>
+        you spent €<strong id="spent-out"></strong> and received €<strong id="received-out"></strong>.
+        <br>
+        your current balance is €<strong id="balance-out"></strong>
+    </p>
+    <ul id="list"></ul>
+    <table id="table" style="display: none"></table>
+</body>
+<script src="main.ts" type="module"></script>
+<script type="module">
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register(new URL('service-worker.js', import.meta.url), { type: 'module' })
+        })
+    }
+</script>
+
+</html>
